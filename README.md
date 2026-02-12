@@ -502,7 +502,7 @@ If you do use it, enable it at session start. Toggling it on mid-conversation re
 
 ## Commands
 
-Custom slash commands are markdown files that define reusable workflows. The two in `commands/` were extracted from manual workflows that kept showing up in `/insights` -- if you notice yourself repeating the same multi-step sequence, it's a good candidate for a command.
+Custom slash commands are markdown files that define parameterized procedures. They take arguments, run a specific sequence of steps, and produce a result. The two in `commands/` were extracted from manual workflows that kept showing up in `/insights` -- if you notice yourself repeating the same multi-step sequence, it's a good candidate for a command.
 
 ```bash
 mkdir -p ~/.claude/commands
@@ -522,9 +522,9 @@ Once a workflow is a command, it's not just faster for you -- it's something an 
 
 ## Writing Skills and Agents
 
-When you find yourself repeating the same multi-step workflow, extract it into a skill or agent. Read Anthropic's [skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) first for guidance on structure, descriptions, and progressive disclosure.
+Skills and agents encode expertise rather than procedures. Where a command runs a specific sequence of steps, a skill teaches Claude *how to think* about a category of work, and an agent is a specialist you hand a job to. Read Anthropic's [skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) first for guidance on structure, descriptions, and progressive disclosure.
 
-**Skills vs. agents.** Skills load instructions into the current session. They're guidance: conventions, checklists, decision trees that enhance whatever the user is already doing. Agents run in their own context window with a dedicated system prompt. They're specialists you hand a job to and get results back from. Use an agent when the work benefits from a focused persona, would bloat the main session with context, needs a constrained tool set, or should run in parallel with other work.
+**Skills** load instructions into the current session. They're conventions, checklists, and decision frameworks that shape how Claude approaches work -- not step-by-step scripts. **Agents** run in their own context window with a dedicated system prompt. Use an agent when the work benefits from a focused persona, would bloat the main session with context, needs a constrained tool set, or should run in parallel with other work.
 
 **Agent personas for security work.** Agents are underused in our plugins. A "senior auditor who's triaged hundreds of reentrancy bugs" approaches code differently than a "fuzzing engineer thinking about coverage and crash triage." The system prompt shapes what the agent notices and prioritizes, not just what steps it follows. When you have deep expertise in a vulnerability class or analysis methodology, encode it as an agent persona, not just a skill checklist.
 
