@@ -344,13 +344,17 @@ Where to publish depends on the audience:
 - **Internal to Trail of Bits** -- submit a PR to [trailofbits/skills-internal](https://github.com/trailofbits/skills-internal).
 - **Third-party skill you want approved** -- submit a PR to [trailofbits/skills-curated](https://github.com/trailofbits/skills-curated) with attribution to the original source. Every PR gets code review.
 
-#### Writing custom skills
+#### Writing skills and agents
 
-When you find yourself repeating the same multi-step workflow, extract it into a skill. Read Anthropic's [skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) first — it covers structure, descriptions, and progressive disclosure.
+When you find yourself repeating the same multi-step workflow, extract it into a skill or agent. Read Anthropic's [skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) first for guidance on structure, descriptions, and progressive disclosure.
 
-The `plugin-dev` plugin (from `claude-plugins-official`) has the tooling for this. `/plugin-dev:skill-development` walks you through a 6-step process: gather concrete usage examples, plan what references and scripts to bundle, create the skill structure, write the SKILL.md, validate with the `skill-reviewer` agent, and iterate on real tasks. For a full plugin with multiple skills, commands, and agents, use `/plugin-dev:create-plugin` instead — it orchestrates the entire process.
+**Skills vs. agents.** Skills load instructions into the current session. They're guidance: conventions, checklists, decision trees that enhance whatever the user is already doing. Agents run in their own context window with a dedicated system prompt. They're specialists you hand a job to and get results back from. Use an agent when the work benefits from a focused persona, would bloat the main session with context, needs a constrained tool set, or should run in parallel with other work.
 
-The quality of a skill depends on what you put into it. For security skills especially, don't just describe the workflow — bundle the reference material that makes it expert-level: analysis checklists, vulnerability patterns, example outputs, and the decision logic an experienced auditor would apply. The SKILL.md itself should be lean (under 2,000 words); move detailed reference content into `references/` files that the skill loads as needed.
+**Agent personas for security work.** Agents are underused in our plugins. A "senior auditor who's triaged hundreds of reentrancy bugs" approaches code differently than a "fuzzing engineer thinking about coverage and crash triage." The system prompt shapes what the agent notices and prioritizes, not just what steps it follows. When you have deep expertise in a vulnerability class or analysis methodology, encode it as an agent persona, not just a skill checklist.
+
+**Tooling.** The `plugin-dev` plugin (from `claude-plugins-official`) has workflows for both. `/plugin-dev:skill-development` walks you through a 6-step process for skills. `/plugin-dev:agent-development` does the same for agents. For a full plugin with multiple components, use `/plugin-dev:create-plugin` to orchestrate the process.
+
+**Quality.** For security skills and agents, don't just describe the workflow. Bundle the reference material that makes it expert-level: analysis checklists, vulnerability patterns, example outputs, and the decision logic an experienced auditor would apply. Keep the SKILL.md lean (under 2,000 words) and move detailed content into `references/` files.
 
 ### MCP Servers
 
