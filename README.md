@@ -227,6 +227,8 @@ In practice, use them to:
 
 Guide and examples: [Automate workflows with hooks](https://code.claude.com/docs/en/hooks-guide)
 
+Don't want to write hooks by hand? The [hookify plugin](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/hookify) generates them from plain English -- `/hookify Warn me when I use rm -rf commands`.
+
 #### Hook events
 
 | Event | When it fires | Can block? |
