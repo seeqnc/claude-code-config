@@ -24,7 +24,7 @@ Global instructions for all projects. Project-specific CLAUDE.md files override 
 
 1. ≤100 lines/function, cyclomatic complexity ≤8
 2. ≤5 positional params
-3. 100-char line length
+3. 120-char line length
 4. Absolute imports only — no relative (`..`) paths
 5. Google-style docstrings on non-trivial public APIs
 
@@ -94,6 +94,52 @@ Prefer `ast-grep` over ripgrep when searching for code structure (function calls
 
 Tests in `tests/` directory mirroring package structure. Supply chain: `pip-audit` before deploying, pin exact versions (`==` not `>=`), verify hashes with `uv pip install --require-hashes`.
 
+### Deno
+
+- Runtime `deno latest`
+- Frontend framework: `Fresh 2.x` **DO NOT use Fresh 1.7.x**
+- Database: `PostgreSQL`
+- Cache: `Redis`
+- Queue: `BullMQ`
+- Use builtin tools for linting and formatting.
+- Use `pino` for logging.
+- Use a LogContext to store request-scoped state.
+- Use Deno APIs, **DO NOT use Node.js APIs**
+- Use `jsr:`, `npm:`, or `https:` specifiers (no `npm install`)
+- Web standard APIs (fetch, Request, Response) are available
+- Top-level await is supported
+- File extensions required in imports
+
+**Imports**
+
+- Use import maps in `deno.json`
+- Prefer `jsr:` imports, use `npm:` when needed
+- Always include `.ts` extension in relative imports
+
+**Naming**
+
+- Files: `snake_case.ts`
+- Tests: `*_test.ts`
+- Classes/Types: `PascalCase`
+- Functions/Variables: `camelCase`
+- Constants: `SCREAMING_SNAKE_CASE`
+
+**Logging (pino)**
+
+```typescript
+// Short event-like messages with structured context
+logger.debug({ query, results, count: results.length }, 'search finished');
+
+// Use 'err' key for exceptions (pino special handling)
+logger.error({ err }, 'search failed');
+```
+
+**Formatting**
+- Tabs for indentation
+- Line width: 120
+- Single quotes
+
+
 ### Node/TypeScript
 
 **Runtime:** Node 22 LTS, ESM only (`"type": "module"`)
@@ -120,62 +166,6 @@ Tests in `tests/` directory mirroring package structure. Supply chain: `pip-audi
 
 Colocated `*.test.ts` files. Supply chain: `pnpm audit --audit-level=moderate` before installing, pin exact versions (no `^` or `~`), enforce 24-hour publish delay (`pnpm config set minimumReleaseAge 1440`), block postinstall scripts (`pnpm config set ignore-scripts true`).
 
-### Rust
-
-**Runtime:** Latest stable via `rustup`
-
-| purpose | tool |
-|---------|------|
-| build & deps | `cargo` |
-| lint | `cargo clippy --all-targets --all-features -- -D warnings` |
-| format | `cargo fmt` |
-| test | `cargo test` |
-| supply chain | `cargo deny check` (advisories, licenses, bans) |
-| safety check | `cargo careful test` (stdlib debug assertions + UB checks) |
-
-**Style:**
-- Prefer `for` loops with mutable accumulators over iterator chains
-- Shadow variables through transformations (no `raw_x`/`parsed_x` prefixes)
-- No wildcard matches; avoid `matches!` macro—explicit destructuring catches field changes
-- Use `let...else` for early returns; keep happy path unindented
-
-**Type design:**
-- Newtypes over primitives (`UserId(u64)` not `u64`)
-- Enums for state machines, not boolean flags
-- `thiserror` for libraries, `anyhow` for applications
-- `tracing` for logging (`error!`/`warn!`/`info!`/`debug!`), not println
-
-**Optimization:**
-- Write efficient code by default — correct algorithm, appropriate data structures, no unnecessary allocations
-- Profile before micro-optimizing; measure after
-
-**Cargo.toml lints:**
-```toml
-[lints.clippy]
-pedantic = { level = "warn", priority = -1 }
-# Panic prevention
-unwrap_used = "deny"
-expect_used = "warn"
-panic = "deny"
-panic_in_result_fn = "deny"
-unimplemented = "deny"
-# No cheating
-allow_attributes = "deny"
-# Code hygiene
-dbg_macro = "deny"
-todo = "deny"
-print_stdout = "deny"
-print_stderr = "deny"
-# Safety
-await_holding_lock = "deny"
-large_futures = "deny"
-exit = "deny"
-mem_forget = "deny"
-# Pedantic relaxations (too noisy)
-module_name_repetitions = "allow"
-similar_names = "allow"
-```
-
 ### Bash
 
 All scripts must start with `set -euo pipefail`. Lint: `shellcheck script.sh && shfmt -d script.sh`
@@ -183,6 +173,19 @@ All scripts must start with `set -euo pipefail`. Lint: `shellcheck script.sh && 
 ### GitHub Actions
 
 Pin actions to SHA hashes with version comments: `actions/checkout@<full-sha>  # vX.Y.Z` (use `persist-credentials: false`). Scan workflows with `zizmor` before committing. Configure Dependabot with 7-day cooldowns and grouped updates. Use `uv` ecosystem (not `pip`) for Python projects so Dependabot updates `uv.lock`.
+
+## Architecture
+
+### Configuration
+- assume .env file based config
+- if the service supports a database or cache, support config overrides
+- always use a consistent naming scheme for environment variables and config keys
+
+### Docker Compose
+- Use `docker-compose` CLI, not `docker compose` if `docker compose` is not available
+- Provide a `docker-compose.dev.yml` for local development setup
+- Provide a `Grafana` `Prometheus` `Loki` setup in docker compose **production** setup
+- Configure docker compose services to use `Loki` for logging in **production** setup
 
 ## Workflow
 
