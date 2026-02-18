@@ -1,6 +1,6 @@
-# Trail of Bits Claude Code Config
+# Seeqnc Claude Code Config
 
-Opinionated defaults, documentation, and workflows for Claude Code at Trail of Bits. Covers sandboxing, permissions, hooks, skills, MCP servers, and usage patterns we've found effective across security audits, development, and research.
+Opinionated defaults, documentation, and workflows for Claude Code at Seeqnc, forked from Trail of Bits. Covers sandboxing, permissions, hooks, skills, MCP servers, and usage patterns we've found effective across security audits, development, and research.
 
 > Also see: [skills](https://github.com/trailofbits/skills) · [skills-curated](https://github.com/trailofbits/skills-curated) · [claude-code-devcontainer](https://github.com/trailofbits/claude-code-devcontainer) · [dropkit](https://github.com/trailofbits/dropkit)
 
