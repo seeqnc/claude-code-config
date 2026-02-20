@@ -187,6 +187,20 @@ Pin actions to SHA hashes with version comments: `actions/checkout@<full-sha>  #
 - Provide a `Grafana` `Prometheus` `Loki` setup in docker compose **production** setup
 - Configure docker compose services to use `Loki` for logging in **production** setup
 
+## Corporate Identity / Brand Guidelines
+
+When working on any UI, frontend, marketing material, or branded content,
+read the full CI guidelines before starting:
+
+→ See `./docs/CI.md`
+
+Key principles (always apply):
+- Brand name is always lowercase: `seeqnc`
+- Dark theme is the default
+- Primary font: PP Neue Machina
+- Accent color: seeqnc Yellow (use sparingly)
+
+
 ## Workflow
 
 **Before committing:**
