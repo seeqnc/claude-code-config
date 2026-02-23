@@ -13,11 +13,33 @@
     "deny": [
       "Bash(rm -rf *)",
       "Bash(rm -fr *)",
+      "Bash(rm -Rf *)",
+      "Bash(rm -rF *)",
+      "Bash(rm -RF *)",
+      "Bash(rm -fR *)",
+      "Bash(rm -Fr *)",
+      "Bash(rm -FR *)",
+      "Bash(rm -r -f *)",
+      "Bash(rm -r -F *)",
+      "Bash(rm -R -f *)",
+      "Bash(rm -R -F *)",
+      "Bash(rm -f -r *)",
+      "Bash(rm -f -R *)",
+      "Bash(rm -F -r *)",
+      "Bash(rm -F -R *)",
+      "Bash(rm --recursive *)",
+      "Bash(rm --recursive --force *)",
+      "Bash(rm --force --recursive *)",
       "Bash(sudo *)",
       "Bash(mkfs *)",
       "Bash(dd *)",
       "Bash(curl *|bash*)",
+      "Bash(curl *| bash*)",
       "Bash(wget *|bash*)",
+      "Bash(wget *| bash*)",
+      "Bash(* | sh)",
+      "Bash(* | zsh)",
+      "Bash(bash <(curl *))",
       "Bash(git push --force*)",
       "Bash(git push *--force*)",
       "Bash(git reset --hard*)",
@@ -53,11 +75,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "CMD=$(jq -r '.tool_input.command'); if echo \"$CMD\" | grep -qE 'rm[[:space:]]+-[^[:space:]]*r[^[:space:]]*f'; then echo 'BLOCKED: Use trash instead of rm -rf' >&2; exit 2; fi"
+            "command": "CMD=$(jq -r '.tool_input.command'); if echo \"$CMD\" | grep -qiE '(^|;[[:space:]]*|&&[[:space:]]*|[|][|][[:space:]]*|[|][[:space:]]*)rm[[:space:]]' && echo \"$CMD\" | grep -qiE '(^|[[:space:]])-[a-zA-Z]*[rR]|--recursive' && echo \"$CMD\" | grep -qiE '(^|[[:space:]])-[a-zA-Z]*[fF]|--force'; then echo 'BLOCKED: Use trash instead of rm -rf' >&2; exit 2; fi"
           },
           {
             "type": "command",
-            "command": "CMD=$(jq -r '.tool_input.command'); if echo \"$CMD\" | grep -qE 'git[[:space:]]+push.*(main|master)'; then echo 'BLOCKED: Use feature branches, not direct push to main' >&2; exit 2; fi"
+            "command": "CMD=$(jq -r '.tool_input.command'); if echo \"$CMD\" | grep -qiE 'git[[:space:]]+push.*(main|master)'; then echo 'BLOCKED: Use feature branches, not direct push to main' >&2; exit 2; fi"
           }
         ]
       }
