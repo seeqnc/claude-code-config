@@ -213,6 +213,7 @@ Key principles (always apply):
 - Never amend/rebase commits already pushed to shared branches
 - Never push directly to main — use feature branches and PRs
 - Never commit secrets, API keys, or credentials — use `.env` files (gitignored) and environment variables
+- Never create a PR towards an upstream project
 
 **Hooks and worktrees:**
 - Install prek in every repo (`prek install`). Run `prek run` before committing. Configure auto-updates: `prek auto-update --cooldown-days 7`
