@@ -89,6 +89,8 @@ Prefer `ast-grep` over ripgrep when searching for code structure (function calls
 | lint & format | `ruff check` · `ruff format` |
 | static types | `ty check` |
 | tests | `pytest -q` |
+| api | 'FastAPI' |
+
 
 **Always use uv, ruff, and ty** over pip/poetry, black/pylint/flake8, and mypy/pyright — they're faster and stricter. Configure `ty` strictness via `[tool.ty.rules]` in pyproject.toml. Use `uv_build` for pure Python, `hatchling` for extensions.
 
@@ -181,25 +183,59 @@ Pin actions to SHA hashes with version comments: `actions/checkout@<full-sha>  #
 - if the service supports a database or cache, support config overrides
 - always use a consistent naming scheme for environment variables and config keys
 
+### Docker
+
+See [DOCKER.md](./docs/DOCKER.md) for detailed Docker guidelines.
+Key principles (always apply):
+- Use latest stable API versions;
+- Assume `docker-compose` for local development setup;
+- Assume `docker buildx` for multi-arch builds;
+- Always pin base images by digest, not tag (`FROM node@sha256:abc...` not `FROM node:20`)
+- Always use `COPY --from=...` to avoid unnecessary layers
+- Always make sure to have multi-arch support for AMD64 and ARM64
+
+
+### Kubernetes
+
+See [K8S.md](./docs/K8S.md) for detailed Kubernetes guidelines.
+
+Key principles (always apply):
+- Use latest stable API versions; avoid deprecated APIs
+- Assume *GCP* for hyperscaler, GKE for managed Kubernetes
+- Assume `kustomize` and `helm` for deployment
+- Assume `argocd` for CI/CD
+- Assume `cert-manager` for TLS
+- Assume `external-dns` for DNS
+- Assume `traefik` for ingress
+- Assume `velero` for backups
+
 ### Docker Compose
 - Use `docker-compose` CLI, not `docker compose` if `docker compose` is not available
 - Provide a `docker-compose.dev.yml` for local development setup
 - Provide a `Grafana` `Prometheus` `Loki` setup in docker compose **production** setup
 - Configure docker compose services to use `Loki` for logging in **production** setup
 
+### CI/CD
+- Assume `github-actions` for main CI/CD
+- Assume `argocd` for GitOps CI/CD
+
+### Observability
+- Assume `prometheus` for monitoring
+- Assume `grafana` for observability
+- Assume `Google Cloud Logging` for logging, support `loki` optionally for self-hosted
+
 ## Corporate Identity / Brand Guidelines
 
 When working on any UI, frontend, marketing material, or branded content,
 read the full CI guidelines before starting:
 
-→ See `./docs/CI.md`
+See [CI.md](./docs/CI.md)
 
 Key principles (always apply):
 - Brand name is always lowercase: `seeqnc`
 - Dark theme is the default
 - Primary font: PP Neue Machina
 - Accent color: seeqnc Yellow (use sparingly)
-
 
 ## Workflow
 

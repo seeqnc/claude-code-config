@@ -18,14 +18,15 @@
 
 #### Usage
 
-| Context                | Weight / Variant              |
-|------------------------|-------------------------------|
-| Headlines / Hero text  | Bold or Ultrabold (Inktrap)   |
-| Subheadings            | Medium                        |
-| Body text              | Regular (Plain)               |
-| UI labels / Captions   | Light or Regular              |
+| Context               | Weight / Variant            |
+|-----------------------|-----------------------------|
+| Headlines / Hero text | Bold or Ultrabold (Inktrap) |
+| Subheadings           | Medium                      |
+| Body text             | Regular (Plain)             |
+| UI labels / Captions  | Light or Regular            |
 
-> **Note**: PP Neue Machina is a licensed commercial font. Ensure valid licenses are in place for web, app, and desktop usage. For fallback/system font stacks use: `"PP Neue Machina", "SF Mono", "Roboto Mono", monospace`
+> **Note**: PP Neue Machina is a licensed commercial font. Ensure valid licenses are in place for web, app, and desktop
+> usage. For fallback/system font stacks use: `"PP Neue Machina", "SF Mono", "Roboto Mono", monospace`
 
 ## Color Palette
 
@@ -33,20 +34,21 @@
 
 <!-- ⚠️ VERIFY exact hex values against the brand book / Figma source of truth -->
 
-| Role             | Color Name      | Hex (approx.)  | Usage                                      |
-|------------------|-----------------|----------------|---------------------------------------------|
-| **Primary**      | seeqnc Yellow   | `#F5D10D`*     | Logo, primary accent, CTAs, highlights      |
-| **Background**   | seeqnc Black    | `#0A0A0A`*     | Page backgrounds, dark surfaces             |
-| **Text Primary** | Off-White       | `#F5F5F5`*     | Body text on dark backgrounds               |
-| **Text Muted**   | Light Gray      | `#A0A0A0`*     | Secondary text, captions, placeholders      |
-| **Surface**      | Dark Gray       | `#1A1A1A`*     | Cards, elevated surfaces, containers        |
+| Role             | Color Name    | Hex (approx.) | Usage                                  |
+|------------------|---------------|---------------|----------------------------------------|
+| **Primary**      | seeqnc Yellow | `#F5D10D`*    | Logo, primary accent, CTAs, highlights |
+| **Background**   | seeqnc Black  | `#0A0A0A`*    | Page backgrounds, dark surfaces        |
+| **Text Primary** | Off-White     | `#F5F5F5`*    | Body text on dark backgrounds          |
+| **Text Muted**   | Light Gray    | `#A0A0A0`*    | Secondary text, captions, placeholders |
+| **Surface**      | Dark Gray     | `#1A1A1A`*    | Cards, elevated surfaces, containers   |
 
 _*Approximate values — confirm against brand book or design tokens._
 
 ### Color Principles
 
 - **Dark-first**: The brand uses a predominantly dark theme. Default to dark backgrounds with light text.
-- **Yellow as accent, not background**: Use seeqnc Yellow sparingly for emphasis — logos, interactive elements, key data points. Never as a large background fill.
+- **Yellow as accent, not background**: Use seeqnc Yellow sparingly for emphasis — logos, interactive elements, key data
+  points. Never as a large background fill.
 - **High contrast**: Maintain strong contrast ratios (WCAG AA minimum) between text and background.
 
 ## Logo
@@ -89,7 +91,8 @@ The core visual motif is derived from **audio sequences** — the "name-giving" 
 
 ## Imagery & Photography
 
-- **Style**: High-contrast, atmospheric photography from the music and events world (DJ sets, festivals, live performances)
+- **Style**: High-contrast, atmospheric photography from the music and events world (DJ sets, festivals, live
+  performances)
 - **Treatment**: Dark, moody tones with selective color — often with yellow/warm accent lighting
 - **Overlay**: Brand patterns or logo marks can be overlaid on photography in Yellow at reduced opacity
 
@@ -115,4 +118,6 @@ When creating any seeqnc-branded material, verify:
 
 ---
 
-> **⚠️ Important**: The hex color values marked with `*` in this document are approximations based on visual inspection of [seeqnc.com](https://www.seeqnc.com/). Replace these with the authoritative values from the brand book / Figma design tokens provided by dotsandlines.
+> **⚠️ Important**: The hex color values marked with `*` in this document are approximations based on visual inspection
+> of [seeqnc.com](https://www.seeqnc.com/). Replace these with the authoritative values from the brand book / Figma design
+> tokens provided by dotsandlines.
