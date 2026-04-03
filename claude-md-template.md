@@ -178,36 +178,34 @@ Pin actions to SHA hashes with version comments: `actions/checkout@<full-sha>  #
 
 ## Architecture
 
+- *Use latest stable API versions for all services and tools*
+- Avoid deprecated APIs and features
+
 ### Configuration
-- assume .env file based config
-- if the service supports a database or cache, support config overrides
-- always use a consistent naming scheme for environment variables and config keys
+- Assume `.env` file based config
+- If the service supports a database or cache, support config overrides
+- Always use a consistent naming scheme for environment variables and config keys
 
 ### Docker
 
 See [DOCKER.md](./docs/DOCKER.md) for detailed Docker guidelines.
 Key principles (always apply):
-- Use latest stable API versions;
 - Assume `docker-compose` for local development setup;
 - Assume `docker buildx` for multi-arch builds;
 - Always pin base images by digest, not tag (`FROM node@sha256:abc...` not `FROM node:20`)
 - Always use `COPY --from=...` to avoid unnecessary layers
 - Always make sure to have multi-arch support for AMD64 and ARM64
 
-
 ### Kubernetes
 
 See [K8S.md](./docs/K8S.md) for detailed Kubernetes guidelines.
 
 Key principles (always apply):
-- Use latest stable API versions; avoid deprecated APIs
 - Assume *GCP* for hyperscaler, GKE for managed Kubernetes
 - Assume `kustomize` and `helm` for deployment
 - Assume `argocd` for CI/CD
-- Assume `cert-manager` for TLS
-- Assume `external-dns` for DNS
 - Assume `traefik` for ingress
-- Assume `velero` for backups
+
 
 ### Docker Compose
 - Use `docker-compose` CLI, not `docker compose` if `docker compose` is not available
